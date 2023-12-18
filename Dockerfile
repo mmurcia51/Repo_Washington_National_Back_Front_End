@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y nodejs && apt-get install -y npm && apt
 RUN mkdir -p /home/appdemoDav
 RUN cd /home/appdemoDav
 RUN npm -y init
-RUN npm install -g npm
+#RUN npm install -g npm
 #RUN npm install express axios redis response-time --save
 ARG CACHEBUST=1
 RUN npm install express --verbose
