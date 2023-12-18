@@ -22,13 +22,13 @@ jobs:
 
       - name: Login to Amazon ECR
         run: |
-          echo $AWS_SECRET_ACCESS_KEY | docker login --username AWS --password-stdin https://public.ecr.aws/p2e1x2x0
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/p2e1x2x0
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Build Docker Image
-        run: docker build -t public.ecr.aws/p2e1x2x0/washington:latest .
+        run: docker build -t washington .
 
       - name: Push Docker Image
         run: docker push public.ecr.aws/p2e1x2x0/washington:latest
