@@ -21,7 +21,11 @@ jobs:
           aws-region: "us-west-2"
 
       - name: Login to Amazon ECR
-        run: aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin public.ecr.aws/p2e1x2x0
+        run: |
+          echo $AWS_SECRET_ACCESS_KEY | docker login --username AWS --password-stdin https://public.ecr.aws/p2e1x2x0
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Build Docker Image
         run: docker build -t public.ecr.aws/p2e1x2x0/washington:latest .
