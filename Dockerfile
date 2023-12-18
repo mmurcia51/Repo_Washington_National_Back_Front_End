@@ -10,7 +10,7 @@ WORKDIR /home/appdemodav
 ARG CACHEBUST=1
 #RUN npm install express
 #RUN npm install axios
-3RUN npm install redis
+#RUN npm install redis
 COPY server.js /home/appdemoDav/
 RUN redis-server
 RUN nodejs server.js
