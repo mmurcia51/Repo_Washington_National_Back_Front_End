@@ -1,0 +1,30 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: tu-region
+
+      - name: Login to Amazon ECR
+        run: aws ecr get-login-password --region tu-region | docker login --username AWS --password-stdin public.ecr.aws/p2e1x2x0
+
+      - name: Build Docker Image
+        run: docker build -t public.ecr.aws/p2e1x2x0/washington:latest .
+
+      - name: Push Docker Image
+        run: docker push public.ecr.aws/p2e1x2x0/washington:latest
