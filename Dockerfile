@@ -1,5 +1,5 @@
 FROM ubuntu:23.10
-MAINTAINER Ronald Frederick version: 0.1
+#MAINTAINER Ronald Frederick version: 0.1
 RUN apt-get update && apt-get install -y nodejs && apt-get install -y npm && apt-get install -y redis
 RUN mkdir -p /home/appdemoDav
 RUN cd /home/appdemoDav
